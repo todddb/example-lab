@@ -67,15 +67,43 @@ void loop() { // ** Create a web server - Adapted from http://www.esp8266learnin
     client.println("<html>");
     client.println("<head>");
 
-    client.println("<h1>LED Flashlight</h1>");
-    client.println("<h2>Example Lab</h2>");
+    // The concept and code of the sliding button on this page came from https://www.w3schools.com/howto/howto_css_switch.asp
+    client.println("<meta name='viewport' content='width=device-width, initial-scale=1'>");
+    client.println("<style>");
+    client.println("html {text-align: center;}");
+    client.println(".switch { position: relative; display: inline-block; width: 60px; height: 34px;}");
+    client.println(".switch input {display:none;}");
+    client.println(".slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;}");
+    client.println(".slider:before {position: absolute; content: \"\"; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s;transition: .4s;}");
+    client.println("input:checked + .slider {background-color: #2196F3;}");
+    client.println("input:focus + .slider {box-shadow: 0 0 1px #2196F3;}");
+    client.println("input:checked + .slider:before {-webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px);}");
+    client.println(".slider.round { border-radius: 34px;}");
+    client.println(".slider.round:before { border-radius: 50%;}");
+    client.println("</style>");
+    client.println("</head>");
+    client.println("<body>");
 
-    client.print("The LED is currently ");
+    client.println("<h2>The Flashlight is currently ");
     client.println(ledState);
+    client.println("</h2>");
 
-    client.println("<br><br>");
-    client.println("<a href=\"/led=on\">ON</a><br>");
-    client.println("<a href=\"/led=off\">OFF</a><br>");
+    // This section modifies the page HTML based on the current state of the LED
+    client.println("<label class='switch'>");
+    client.print("  <input type=\"checkbox\" ");
+    if (ledState == "on") {
+      client.print("checked ");
+    }
+    client.print("onchange=\"window.location.href='/led=");
+    if (ledState == "on") {
+      client.print("off");
+    } else {
+      client.print("on");
+    }
+    client.println("'\">");
+    client.println("  <span class=\"slider round\"></span>");
+    client.println("</label>");
+    client.println("</body>");
     client.println("</html>");
   }
   delay(100); // This introduces a little pause in each cycle. Probably helps save some power.
