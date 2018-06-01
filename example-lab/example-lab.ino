@@ -36,7 +36,7 @@ void setup() {                        // Perform this part once when first power
   Serial.print("http://");
   Serial.print(WiFi.localIP());
   Serial.println("/");
-} // ** End Adapted Code - This is the end of the code that was adapted from www.esplearning.com
+} // ** End Adapted Code - This is the end of the code that was adapted from www.esp8266learning.com
 
 void loop() { // ** Create a web server - Adapted from http://www.esp8266learning.com/wemos-webserver-example.php
   WiFiClient client = server.available(); // Create a new client object for available connections
@@ -57,7 +57,7 @@ void loop() { // ** Create a web server - Adapted from http://www.esp8266learnin
       digitalWrite(ledPin, LOW);              //   then set the ledPin to low (turn off)
       ledState = "off";                       //   and track the state as "off"
     }
-    // ** End Adapted Code - This is the end of the code that was adapted from www.esplearning.com
+    // ** End Adapted Code - This is the end of the code that was adapted from www.esp8266learning.com
 
     // Return the response
     client.println("HTTP/1.1 200 OK");
@@ -74,8 +74,8 @@ void loop() { // ** Create a web server - Adapted from http://www.esp8266learnin
     client.println(ledState);
 
     client.println("<br><br>");
-    client.println("<a href=\"/led=on\">ON</a>");
-    client.println("<a href=\"/led=off\">OFFe</a>");
+    client.println("<a href=\"/led=on\">ON</a><br>");
+    client.println("<a href=\"/led=off\">OFF</a><br>");
     client.println("</html>");
   }
   delay(100); // This introduces a little pause in each cycle. Probably helps save some power.
