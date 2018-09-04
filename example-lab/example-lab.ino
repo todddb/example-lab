@@ -9,7 +9,7 @@ int ledPin = D5;                      // Sets which GPIO pin we will use for the
 String ledState = "off";              // Initialize a variable for tracking the state of the LED
 
 void setup() {                        // Perform this part once when first powered on
-  Serial.begin(115200);               // Open a serial connection (for debugging)
+  Serial.begin(9600);               // Open a serial connection (for debugging)
   delay(10);                          // Wait 10 milliseconds (1/100th of a second)
   Serial.println("Initializing ..."); // DEBUG CODE
 
